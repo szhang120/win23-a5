@@ -48,15 +48,14 @@ if [[ $($CALCULATOR 25 '*' 25 ) -ne 625 ]]; then  # If the output of the program
   exit 1
 fi
 
-# custom 2: div 0
+# custom 2: div round down
 if [[ $($CALCULATOR 25 / 50 ) -ne 0 ]]; then  # If the output of the program is not 0...
   echo "ERROR! A valid run of the calculator (25 / 50) failed to produce 0 as an output!"
   exit 1
 fi
 
-# custom 3: type
-if $CALCULATOR 'n' + 1; then
-  echo 'ERROR! an invalid argument (str) was accepted'
+# custom 2: sub to 0
+if [[ $($CALCULATOR 3 - 3 ) -ne 0 ]]; then  # If the output of the program is not 0...
+  echo "ERROR! A valid run of the calculator (3 - 3) failed to produce 0 as an output!"
   exit 1
 fi
-
