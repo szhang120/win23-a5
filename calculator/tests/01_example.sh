@@ -54,8 +54,15 @@ if [[ $($CALCULATOR 25 / 50 ) -ne 0 ]]; then  # If the output of the program is 
   exit 1
 fi
 
-# custom 2: sub to 0
+# custom 3: sub to 0
 if [[ $($CALCULATOR 3 - 3 ) -ne 0 ]]; then  # If the output of the program is not 0...
   echo "ERROR! A valid run of the calculator (3 - 3) failed to produce 0 as an output!"
   exit 1
+fi
+
+# custom 4: make clean
+make clean
+if [ -f "./calculator" ] || ls *.o &> /dev/null; then
+    echo "ERROR! 'make clean' failed."
+    exit 1
 fi

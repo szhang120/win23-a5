@@ -1,7 +1,5 @@
-# Compiling with Make
-
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11
+CFLAGS = -Wall -Wextra -Wno-unused-parameter -std=c11
 SRC = main.c addition.c subtraction.c multiplication.c division.c
 OBJ = $(SRC:.c=.o)
 TARGET = calculator
