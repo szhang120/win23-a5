@@ -19,4 +19,3 @@ $(TARGET): $(OBJ)
 # clean object files and executable, then rebuild
 clean:
 	rm -f $(OBJ) $(TARGET)
-	$(MAKE) all
