@@ -29,3 +29,46 @@ if $CALCULATOR 3 @ 2; then  # If the return code of $PROGRAM is zero (i.e. succe
   echo 'ERROR! An invalid run of the application (3 @ 2) apparently succeeded?!'
   exit 1
 fi
+
+#!/bin/bash
+# CI Test Suite for the Calculator Program
+# Addresses Part I – Writing CI tests
+
+# Ensure that the calculator executable is available.
+# Assuming tests/ directory is inside the calculator directory.
+if [ ! -x "../calculator" ]; then
+    echo "Calculator executable not found. Building the program..."
+    cd .. && make
+    cd tests
+fi
+
+# Function to test a calculation.
+# Usage: test_calculation operator operand1 operand2 expected_result
+test_calculation() {
+    op=$1
+    a=$2
+    b=$3
+    expected=$4
+
+    result=$(../calculator "$op" "$a" "$b")
+    if [ "$result" == "$expected" ]; then
+        echo "Test passed for: $a $op $b = $result"
+    else
+        echo "Test FAILED for: $a $op $b. Expected $expected but got $result"
+        exit 1
+    fi
+}
+
+# extra 1: check 25*25 = 625
+test_calculation '*' 25 25 625
+
+# extra 2: check 55 / 5 = 11
+test_calculation / 55 5 11
+
+# extra 3: check 12 + 12 = 24
+test_calculation + 12 12 24
+
+# extra 3: check 12 - 12 = 0
+test_calculation - 12 12 0
+
+echo "All tests passed!"
