@@ -42,33 +42,21 @@ if [ ! -x "../calculator" ]; then
     cd tests
 fi
 
-# Function to test a calculation.
-# Usage: test_calculation operator operand1 operand2 expected_result
-test_calculation() {
-    op=$1
-    a=$2
-    b=$3
-    expected=$4
+# custom 1: mult
+if [[ $($CALCULATOR 25 '*' 25 ) -ne 625 ]]; then  # If the output of the program is not 625...
+  echo "ERROR! A valid run of the calculator (25 '*' 25) failed to produce 2 as an output!"
+  exit 1
+fi
 
-    result=$(../calculator "$op" "$a" "$b")
-    if [ "$result" == "$expected" ]; then
-        echo "Test passed for: $a $op $b = $result"
-    else
-        echo "Test FAILED for: $a $op $b. Expected $expected but got $result"
-        exit 1
-    fi
-}
+# custom 2: div 0
+if $CALCULATOR 1 / 0; then
+  echo 'ERROR! division by zero somehow ran.'
+  exit 1
+fi
 
-# extra 1: check 25*25 = 625
-test_calculation '*' 25 25 625
+# custom 3: type
+if $CALCULATOR 'n' + 1; then
+  echo 'ERROR! an invalid argument (str) was accepted'
+  exit 1
+fi
 
-# extra 2: check 55 / 5 = 11
-test_calculation / 55 5 11
-
-# extra 3: check 12 + 12 = 24
-test_calculation + 12 12 24
-
-# extra 3: check 12 - 12 = 0
-test_calculation - 12 12 0
-
-echo "All tests passed!"
