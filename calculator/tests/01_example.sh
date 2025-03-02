@@ -44,13 +44,13 @@ fi
 
 # custom 1: mult
 if [[ $($CALCULATOR 25 '*' 25 ) -ne 625 ]]; then  # If the output of the program is not 625...
-  echo "ERROR! A valid run of the calculator (25 '*' 25) failed to produce 2 as an output!"
+  echo "ERROR! A valid run of the calculator (25 '*' 25) failed to produce 625 as an output!"
   exit 1
 fi
 
 # custom 2: div 0
-if $CALCULATOR 1 / 0; then
-  echo 'ERROR! division by zero somehow ran.'
+if [[ $($CALCULATOR 25 / 50 ) -ne 0 ]]; then  # If the output of the program is not 0...
+  echo "ERROR! A valid run of the calculator (25 / 50) failed to produce 0 as an output!"
   exit 1
 fi
 
